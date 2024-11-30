@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown Timer</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+     <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(144, 20, 86);
+
+
+}
+.heading{
+    color: rgb(231, 226, 226);
+    margin-left: 160px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+
+}
+
+.container{
+    background-color: rgb(15, 3, 3);
+    width: 40%;
+    min-width: 50px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    padding: 20px 0;
+    border-radius: 10px;
+    padding-bottom: 50px;
+    box-shadow: 20px 0 20px rgba(196, 170, 170, 0.338);
+
+}
+.timer-display{
+    position: relative;
+    width: 90%;
+    background: rgb(232, 226, 226);
+    font-family: 'Roboto mono',monospace;
+    color: rgb(237, 14, 14);
+    font-size: 35px;
+    left: 4%;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 0 20px rgba(65,5,145,0.25);
+    border-radius: 5px;
+}
+.buttons{
+    width: 90%;
+    margin: 60px auto 0 auto;
+    display: flex;
+    justify-content: space-around;
+
+}
+.buttons button{
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: 45px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    font-family: 'poppins', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    font-size: 25px;
+    font-weight: bold;
+}
+.buttons button:nth-last-child(2){
+    background-color: orangered;
+}
+.buttons button:nth-last-child(1){
+    background-color: yellow
+}
+
+.buttons button:hover{
+    box-shadow: 0 10px 20px rgba(231, 201, 201, 0.25);
+}
+.footer{
+    text-align: center;
+    margin-top: 50px;
+    color: rgb(248, 242, 242);
+    font-size: 22px;
+
+}
+.footer p{
+    margin-top: 40px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 25px;
+}
+     </style>
+</head>
+<body>
+    <div class="container">
+        <heading class="heading"></heading>
+        <div class="timer-display">
+            00 : 00 : 00 : 000
+        </div>
+        <div class="buttons">
+            <button id="start-timer">Start</button>
+            <button id="pause-timer">Pause</button>
+            <button id="reset-timer">Reset</button>
+        </div>
+        <div class="footer">
+            <p>Made By Sumit😎</p>
+    </div>
+
+    <script>
+        let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+let timeRef = document.querySelector(".timer-display");
+let int = null;
+
+document.getElementById("start-timer").addEventListener("click", () => {
+    if(int !== null) {
+        clearInterval(int);
+    }
+    int = setInterval(displayTimer, 10);
+});
+
+document.getElementById("pause-timer").addEventListener("click", () => {
+    clearInterval(int);
+});
+
+document.getElementById("reset-timer").addEventListener("click", () => {
+    clearInterval(int);
+    [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+    timeRef.innerHTML = "00 : 00 : 00 : 000 ";
+}); 
+
+function displayTimer() {
+    milliseconds += 10;
+    if(milliseconds == 1000) {
+        milliseconds = 0;
+        seconds++;
+        if(seconds == 60) {
+            seconds = 0;
+            minutes++;
+            if(minutes == 60) {
+                minutes = 0;
+                hours++;
+            }
+        }
+    }
+
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
+    let ms = 
+        milliseconds < 10
+        ? "00" + milliseconds
+        : milliseconds < 100
+        ? "0" + milliseconds
+        : milliseconds;
+
+    timeRef.innerHTML = `${h} : ${m} : ${s} : ${ms}`;
+
+}
+    </script>
+</body>
+</html>

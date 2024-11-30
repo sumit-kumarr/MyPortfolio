@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Calculator </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 25px;
+            box-sizing: border-box;
+        }
+
+        .display h1 {
+            color: white;
+            margin-left: 8px;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        body {
+            min-height: 100vh;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #0a0a0a, #3a4452);
+        }
+
+        .calculator {
+            padding: 15px;
+            box-shadow: 0 0 15px #000;
+            border: 2px solid rgba(116, 114, 114);
+            border-radius: 15px;
+        }
+
+        .display input {
+            width: 360px;
+            border: none;
+            margin: 10px;
+            padding: 20px;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        input::placeholder {
+            color: aquamarine;
+            font-size: bold;
+        }
+
+        button {
+            width: 70px;
+            height: 70px;
+            font-size: 20px;
+            font-weight: 600;
+            border: 0;
+            box-shadow: -5px -6px 15px #000;
+            border-radius: 50%;
+            outline: 1px solid #313131;
+            outline-offset: 3px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:active {
+            background-color: #000;
+            transform: translate(2px, 2px);
+        }
+
+        .opr {
+            background-color: black;
+            color: yellow;
+            font-weight: 700;
+
+        }
+
+        .equal {
+            background-color: orangered;
+            font-weight: 900;
+        }
+
+        .footer {
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <div class="display">
+            <h1 class="head">CALCULATOR</h1>
+            <input type="text" id="inputbox" placeholder="0">
+        </div>
+        <div class="row">
+            <button type="button" class="opr">AC</button>
+            <button type="button" class="opr">DEL</button>
+            <button type="button" class="opr">%</button>
+            <button type="button" class="opr">/</button>
+        </div>
+        <div class="row">
+            <button type="button">7</button>
+            <button type="button">8</button>
+            <button type="button">9</button>
+            <button type="button" class="opr">*</button>
+
+        </div>
+        <div class="row">
+            <button type="button">4</button>
+            <button type="button">5</button>
+            <button type="button">6</button>
+            <button type="button" class="opr">-</button>
+        </div>
+        <div class="row">
+            <button type="button">1</button>
+            <button type="button">2</button>
+            <button type="button">3</button>
+            <button type="button" class="opr">+</button>
+        </div>
+        <div class="row">
+            <button type="button" id="plusMinus">&#xB1;</button>
+            <button type="button">0</button>
+            <button type="button">.</button>
+            <button type="button" class="equal">=</button>
+        </div>
+        <div class="footer">
+            <h4>Made By Sumit</h4>
+        </div>
+    </div>
+    <script>
+        let inputbox = document.getElementById("inputbox")
+        let button = document.querySelectorAll("button")
+
+        let string = " "
+
+        button.forEach(element => {
+            element.addEventListener('click', (b) => {
+                if (b.target.innerText == '=') {
+                    string = String(eval(string))
+                    inputbox.value = string;
+                }
+                else if (b.target.innerText == 'AC') {
+                    string = ''
+                    inputbox.value = string;
+
+                }
+                else if (b.target.innerText == 'DEL') {
+                    string = string.substring(0, string.length - 1)
+                    inputbox.value = string;
+                }
+                else if (b.target.id == 'plusMinus') {
+                    string = String(-eval(string))
+                    inputbox.value = string;
+                }
+                else {
+                    string += b.target.innerText
+                    inputbox.value = string
+                }
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>
